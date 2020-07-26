@@ -1,0 +1,1 @@
+git+git://github.com/flyingcircusio/batou_ext.git@255abd80495e018c07b73d3a20bbf4319a2a534d#egg=batou_ext
