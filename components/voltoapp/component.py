@@ -1,5 +1,7 @@
 """clone voltoapp
 
+TODO update voltoapp
+
 yarn build if repository has changes (package.json)
 """
 
@@ -21,7 +23,7 @@ class Voltoapp(Component):
         self += Clone(
             self.apprepository, 
             revision='HEAD', 
-            update_unpinned=True
+            vcs_update=True,
             )
 
         voltoportandrazzle = (self.voltoport and self.razzleapipath) and '{}={} {}={}'.format( \
@@ -38,3 +40,4 @@ class VoltoappRebuild(Component):
 
     def update(self):
         self.cmd(self.buildparameter + ' yarn build')
+        print("VoltoApp rebuild")
