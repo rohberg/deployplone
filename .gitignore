@@ -1,4 +1,7 @@
 .batou/
+work/
+.batou-lock
+
 
 # Logs
 logs
