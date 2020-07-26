@@ -3,7 +3,7 @@ from batou.component import Component
 from batou.lib.file import File
 from batou.lib.git import Clone
 
-# TODO watch for new build
+# INFO restart not necessary as process is started with --watch
 
 class Pm2(Component):
 
@@ -15,3 +15,4 @@ class Pm2(Component):
             'website.pm2.config.js', 
             source='website.pm2.config.js'
             )
+        self.cmd("pm2 start {} --watch".format(self.workdir + '/website.pm2.config.js'))
