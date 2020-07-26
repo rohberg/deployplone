@@ -200,7 +200,6 @@ def run(argv, meta_args):
     env_dir = _prepare(meta_args)
     # Allow called programs to find out where the wrapper lives
     os.environ['APPENV_BASEDIR'] = meta_args.base
-    print("os.path.join(env_dir, 'bin', meta_args.appname)", os.path.join(env_dir, 'bin', meta_args.appname))
     os.execv(os.path.join(env_dir, 'bin', meta_args.appname), argv)
 
 
