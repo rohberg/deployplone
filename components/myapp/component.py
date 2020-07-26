@@ -7,7 +7,7 @@ class Tick(Component):
     def configure(self):
         self += File(
             'tick.sh',
-            mode=0755,
+            mode=0o755,
             content="""\
 #!/bin/bash
 while true; do
