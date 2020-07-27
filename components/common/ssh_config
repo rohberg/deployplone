@@ -1,0 +1,9 @@
+StrictHostKeyChecking no
+Host github.com
+    Hostname ssh.github.com
+    User rohbergdeployment
+    Port 443
+    IdentityFile ~/.ssh/id_rsa_rohbergdeployment
+
+# User rohbergdeployment instead of git
+# rohbergdeployment is collaborator on github repositories
