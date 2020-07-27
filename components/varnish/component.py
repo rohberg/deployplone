@@ -20,7 +20,7 @@ class Varnish(Component):
             'https://varnish-cache.org/_downloads/varnish-6.4.0.tgz',
             checksum='sha256:f636ba2d881b146f480fb52efefae468b36c2c3e6620d07460f9ccbe364a76c2',
         )
-        self += File('zhkath.vcl', source='zhkath.vcl')
+        self += File('websiteplone.vcl', source='websiteplone.vcl')
         # self += Program(
         #     'varnish',
         #     priority=20,
