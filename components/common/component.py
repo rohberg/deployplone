@@ -8,7 +8,7 @@ class Common(Component):
 
     github_ssh_key = None
     setuptools = "42.0.2"
-    zc_buildout = "2.13.2"
+    zc_buildout = "2.13.3"
 
     def configure(self):
         self.provide('common', self)
