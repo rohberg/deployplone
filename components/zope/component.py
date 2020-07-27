@@ -8,19 +8,16 @@ from batou.utils import Address
 
 
 class Zope(Component):
+    backupsdir = Attribute(str, '')
     adminpw = 'admin'
-    profile = 'base'
-    eggs_directory = '{{component.environment.workdir_base}}/eggs'
-    instance_name = 'zhkath'
-    backupsdir = '{{component.environment.workdir_base}}/backup'
+    instance_name = 'zeoclientoderso'
+    zeoaddress = Attribute(Address, '127.0.0.1:11981')
 
 
     def configure(self):
-        self.zeo = self.require_one('zhkath:zeo:server')
         self.common = self.require_one('common', host=self.host)
         self.zope_instances = self.require('zope:http')
-        # self.provide('zope:common', self)
-        self.eggs_directory = self.expand(self.eggs_directory)
+        self.backupsdir = self.backupsdir or self.expand('{{component.workdir}}/var/backup')
 
         self += Buildout(
             python='3.7', 
@@ -29,22 +26,10 @@ class Zope(Component):
             additional_config=[Directory('profiles', source='profiles')]
             )
 
-        # for instance in self.zope_instances:
-        #     self += Program(
-        #         instance.script_id,
-        #         priority=11,
-        #         options={
-        #             'startsecs': 20,
-        #             'stopsignal': 'INT',
-        #             'stopwaitsecs': 5,
-        #         },
-        #         command=self.map('bin/{} console'.format(instance.script_id)),
-        #     )
-
 
 class BaseInstance(Component):
     workdir = '{{component.zope.workdir}}'
-    address = Attribute(Address, '127.0.0.1:9081')
+    address = Attribute(Address, '127.0.0.1:11991')
     script_id = "instance1"
 
     def configure(self):
@@ -56,7 +41,7 @@ class Instance1(BaseInstance):
 
 
 class Instance2(BaseInstance):
-    address = Attribute(Address, '127.0.0.1:9082')
+    address = Attribute(Address, '127.0.0.1:11992')
     script_id = "instance2"
 
 
