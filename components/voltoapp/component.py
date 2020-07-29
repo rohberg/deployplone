@@ -9,14 +9,17 @@ from batou.component import Attribute
 from batou.component import Component
 from batou.lib.file import File
 from batou.lib.git import Clone
+from batou.utils import Address
 
-port = "PORT="
-razzle = "RAZZLE_API_PATH="
+# global configuration that is not individually for environments 
+configuration = {
+    'apprepository': 'https://github.com/ksuess/schweikertruth.git',
+}
 
 class Voltoapp(Component):
-    apprepository = Attribute(str, 'https://github.com/ksuess/schweikertruth.git')
-    voltoport = Attribute(str, '3000')
-    razzleapipath = Attribute(str, '')
+    apprepository = Attribute(str, configuration['apprepository'])
+    address = Attribute(Address, 'localhost:3000')
+    razzleapipath = Attribute(str, 'localhost:11080/api')
 
     def configure(self):
         self.provide('voltoapp', self)
@@ -26,8 +29,8 @@ class Voltoapp(Component):
             vcs_update=True,
             )
 
-        voltoportandrazzle = (self.voltoport and self.razzleapipath) and '{}={} {}={}'.format( \
-            port, self.voltoport, razzle, self.razzleapipath) or ''
+        voltoportandrazzle = 'PORT={} RAZZLE_API_PATH={}'.format( \
+            self.address.connect.port, self.razzleapipath)
         self += VoltoappRebuild(voltoportandrazzle)
 
 

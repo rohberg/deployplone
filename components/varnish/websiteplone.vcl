@@ -11,8 +11,8 @@ one year 31536000
 import std;
 
 backend default {
-    .host = "{{component.haproxy.address.connect.host}}";
-    .port = "{{component.haproxy.address.connect.port}}";
+    .host = "{{component.voltoapp.address.connect.host}}";
+    .port = "{{component.voltoapp.address.connect.port}}";
 }
 
 acl purge {

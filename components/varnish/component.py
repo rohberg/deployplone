@@ -7,15 +7,14 @@ from batou.utils import Address
 
 class Varnish(Component):
 
-    address = Attribute(Address, '127.0.0.1:9090')
-    control_port = Attribute(int, '6083')
+    address = Attribute(Address, 'localhost:11090')
+    control_port = Attribute(int, '11091')
 
     def configure(self):
         # self.provide('varnish:http', self)
         self.purgehosts = self.require('zope:http')
         self.haproxy = self.require_one('haproxy:frontend')
 
-        # self.cmd('export LC_ALL=en_US.UTF-8; export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8')
         self += Build(
             'https://varnish-cache.org/_downloads/varnish-6.4.0.tgz',
             checksum='sha256:f636ba2d881b146f480fb52efefae468b36c2c3e6620d07460f9ccbe364a76c2',
