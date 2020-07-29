@@ -7,7 +7,7 @@ class HAProxy(Component):
     """TODO Documentation HAProxy."""
 
     port = '11080'
-    address = Attribute(Address, '{{host.fqdn}}:11080')
+    address = Attribute(Address, 'localhost:11080')
     stats_socket = Attribute(str, '{{component.workdir}}/haproxy_admin.sock')
     jail_dir = Attribute(str, '/tmp')
 

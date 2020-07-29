@@ -11,7 +11,7 @@ class Zope(Component):
     backupsdir = Attribute(str, '')
     adminpw = 'admin'
     instance_name = 'zeoclientoderso'
-    zeoaddress = Attribute(Address, '127.0.0.1:11981')
+    zeoaddress = Attribute(Address, 'localhost:11981')
 
 
     def configure(self):
@@ -29,7 +29,7 @@ class Zope(Component):
 
 class BaseInstance(Component):
     workdir = '{{component.zope.workdir}}'
-    address = Attribute(Address, '127.0.0.1:11991')
+    address = Attribute(Address, 'localhost:11991')
     script_id = "instance1"
 
     def configure(self):
@@ -41,15 +41,15 @@ class Instance1(BaseInstance):
 
 
 class Instance2(BaseInstance):
-    address = Attribute(Address, '127.0.0.1:11992')
+    address = Attribute(Address, 'localhost:11992')
     script_id = "instance2"
 
 
 # class Instance3(BaseInstance):
-#     address = Attribute(Address, '127.0.0.1:9083')
+#     address = Attribute(Address, 'localhost:9083')
 #     script_id = "instance3"
 
 
 # class Instance4(BaseInstance):
-#     address = Attribute(Address, '127.0.0.1:9084')
+#     address = Attribute(Address, 'localhost:9084')
 #     script_id = "instance4"
