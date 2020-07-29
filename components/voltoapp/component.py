@@ -15,7 +15,7 @@ razzle = "RAZZLE_API_PATH="
 
 class Voltoapp(Component):
     apprepository = Attribute(str, 'https://github.com/ksuess/schweikertruth.git')
-    voltoport = Attribute(str, '')
+    voltoport = Attribute(str, '3000')
     razzleapipath = Attribute(str, '')
 
     def configure(self):
