@@ -11,6 +11,12 @@ module.exports = {
       env_development : {
          "NODE_ENV": "development"
       }
+    },
+    {
+      name: "{{component.varnishname}}",
+      script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
+      args: "{{component.varnish.daemonargs}}",
+      cwd: "{{component.varnish.workdir}}",
     }
   ]
 };
@@ -23,4 +29,4 @@ module.exports = {
 // see documentation:
 // https://pm2.keymetrics.io/docs/usage/application-declaration/
 
-// TOOD zeo, zope, instances
+// TOOD haproxy, zeo, zope, instances

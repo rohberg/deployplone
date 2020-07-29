@@ -19,7 +19,7 @@ configuration = {
 class Voltoapp(Component):
     apprepository = Attribute(str, configuration['apprepository'])
     address = Attribute(Address, 'localhost:3000')
-    razzleapipath = Attribute(str, 'localhost:11080/api')
+    razzleapipath = Attribute(str, 'localhost:11080/api') # TODO haproxy port eintragen
 
     def configure(self):
         self.provide('voltoapp', self)
