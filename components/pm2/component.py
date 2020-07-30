@@ -9,10 +9,13 @@ class Pm2(Component):
 
     voltoappname = Attribute(str, "environment.website-volto")
     varnishname = Attribute(str, "environment.website-varnish")
+    zopename = Attribute(str, "environment.website-zope")
 
     def configure(self):
+        # self.provide('pm2', self)
         self.voltoapp = self.require_one('voltoapp')
         self.varnish = self.require_one('varnish:http')
+        self.zopecommon = self.require_one('zopecommon')
         self += File(
             'website.pm2.config.js', 
             source='website.pm2.config.js'

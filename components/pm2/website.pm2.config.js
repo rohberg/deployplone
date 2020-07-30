@@ -12,12 +12,39 @@ module.exports = {
          "NODE_ENV": "development"
       }
     },
+
+    {
+      name: "{{component.zopename}}-api-zeo",
+      script: "{{component.zopecommon.workdir}}/bin/zeo",
+      args: "fg",
+      cwd: "{{component.zopecommon.workdir}}",
+      interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      kill_timeout : 3000,
+    },
+    {
+      name: "{{component.zopename}}-api-instance1",
+      script: "{{component.zopecommon.workdir}}/bin/instance1",
+      args: "console",
+      cwd: "{{component.zopecommon.workdir}}",
+      interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      kill_timeout : 3000,
+    },
+    {
+      name: "{{component.zopename}}-api-instance2",
+      script: "{{component.zopecommon.workdir}}/bin/instance2",
+      args: "console",
+      cwd: "{{component.zopecommon.workdir}}",
+      interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      kill_timeout : 3000,
+    },
+
     {
       name: "{{component.varnishname}}",
       script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
       args: "{{component.varnish.daemonargs}}",
       cwd: "{{component.varnish.workdir}}",
-    }
+    },
+
   ]
 };
 
