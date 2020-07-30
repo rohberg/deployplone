@@ -14,12 +14,13 @@ module.exports = {
     },
 
     {
-      name: "{{component.zopename}}-api-zeo",
-      script: "{{component.zopecommon.workdir}}/bin/zeo",
+      name: "{{component.zopename}}-api-zeoserver",
+      script: "{{component.zopecommon.workdir}}/bin/zeoserver",
       args: "fg",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
-      kill_timeout : 3000,
+      min_uptime: 10000,
+      kill_timeout: 3000,
     },
     {
       name: "{{component.zopename}}-api-instance1",
@@ -27,6 +28,7 @@ module.exports = {
       args: "console",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      min_uptime: 10000,
       kill_timeout : 3000,
     },
     {
@@ -35,6 +37,7 @@ module.exports = {
       args: "console",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      min_uptime: 10000,
       kill_timeout : 3000,
     },
 
