@@ -1,3 +1,4 @@
+from batou import UpdateNeeded
 from batou.component import Attribute
 from batou.component import Component
 from batou.lib.file import File
@@ -20,4 +21,13 @@ class Pm2(Component):
             'website.pm2.config.js', 
             source='website.pm2.config.js'
             )
+        self += RestartAll() 
+
+
+class RestartAll(Component):
+
+    def verify(self):
+        raise UpdateNeeded()
+
+    def update(self):
         self.cmd("pm2 restart {} --watch".format(self.workdir + '/website.pm2.config.js'))
