@@ -23,14 +23,14 @@ class Zope(Component):
             python='3.7', 
             version=self.common.zc_buildout, 
             setuptools=self.common.setuptools,
-            # additional_config=[Directory('profiles', source='profiles')]
+            additional_config=[Directory('profiles', source='profiles')]
             )
         self += Program(
-            'zeo',
+            'zeoserver',
             priority=10,
             options={'startsecs': 30},
-            command=self.map('bin/zeo start'),
-            args=self.expand('-C {{component.workdir}}/parts/zeo/zeo.conf')
+            command=self.map('bin/zeoserver start'),
+            args=self.expand('-C {{component.workdir}}/parts/zeoserver/zeo.conf')
         )
         for instance in self.zope_instances:
             self += Program(

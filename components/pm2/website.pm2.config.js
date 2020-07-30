@@ -14,8 +14,8 @@ module.exports = {
     },
 
     {
-      name: "{{component.zopename}}-api-zeo",
-      script: "{{component.zopecommon.workdir}}/bin/zeo",
+      name: "{{component.zopename}}-api-zeoserver",
+      script: "{{component.zopecommon.workdir}}/bin/zeoserver",
       args: "fg",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
