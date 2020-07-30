@@ -14,7 +14,7 @@ class Zope(Component):
     zeoaddress = Attribute(Address, '127.0.0.1:11981')
 
     def configure(self):
-        # self.provide('zopecommon', self)
+        self.provide('zopecommon', self)
         self.common = self.require_one('common', host=self.host)
         self.zope_instances = self.require('zope:http')
         self.backupsdir = self.backupsdir or self.expand('{{component.workdir}}/var/backup')
@@ -24,24 +24,6 @@ class Zope(Component):
             version=self.common.zc_buildout, 
             setuptools=self.common.setuptools,
             additional_config=[Directory('profiles', source='profiles')]
-            )
-        self += Program(
-            'zeoserver',
-            priority=10,
-            options={'startsecs': 30},
-            command=self.map('bin/zeoserver start'),
-            args=self.expand('-C {{component.workdir}}/parts/zeoserver/zeo.conf')
-        )
-        for instance in self.zope_instances:
-            self += Program(
-                instance.script_id,
-                priority=11,
-                options={
-                    'startsecs': 20,
-                    'stopsignal': 'INT',
-                    'stopwaitsecs': 5,
-                },
-                command=self.map('bin/{} console'.format(instance.script_id)),
             )
 
 
