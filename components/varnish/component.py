@@ -4,10 +4,11 @@ from batou.lib.cmmi import Build
 from batou.lib.file import File
 from batou.utils import Address
 
+# TODO -n name individually
 
 class Varnish(Component):
 
-    address = Attribute(Address, 'localhost:11090')
+    address = Attribute(Address, '127.0.0.1:11090')
     control_port = Attribute(int, '11091')
     daemon = ''
     daemonargs = ''
@@ -26,13 +27,15 @@ class Varnish(Component):
         self.daemonargs = self.expand(
                 '-F -f {{component.workdir}}/zhkath.vcl '
                 '-T localhost:{{component.control_port}} '
-                '-a {{component.address.listen}} -p thread_pool_min=10 '
-                '-p thread_pool_max=50 -s malloc,250M '
-                '-n zhkath'
+                '-a {{component.address.listen}} '
+                '-p thread_pool_min=10 '
+                '-p thread_pool_max=50 '
+                '-s malloc,250M '
+                '-n websitesomething'
             )
         print("varnish self.daemon", self.daemon)
 
-        self += PurgeCache()
+        # self += PurgeCache() TODO purge cache on batou run. see pm2
 
 
 class PurgeCache(Component):
