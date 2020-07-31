@@ -21,7 +21,7 @@ configuration = {
 class Voltoapp(Component):
     apprepository = Attribute(str, configuration['apprepository'])
     address = Attribute(Address, 'localhost:3000')
-    razzleapipath = Attribute(str, 'localhost:11080/api') # TODO haproxy port eintragen
+    razzleapipath = Attribute(str, 'http://localhost:11080/Plone/api') # TODO haproxy port eintragen
 
     def configure(self):
         self.provide('voltoapp', self)
@@ -41,6 +41,7 @@ class Voltoapp(Component):
         voltoportandrazzle = 'PORT={} RAZZLE_API_PATH={}'.format( \
             self.address.connect.port, self.razzleapipath)
         self.cmd(voltoportandrazzle + ' yarn build')
+        self.log("Voltoapp rebuild with {}".format(voltoportandrazzle))
 
 
 

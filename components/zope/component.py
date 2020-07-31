@@ -27,6 +27,7 @@ class Zope(Component):
             additional_config=[Directory('profiles', source='profiles')]
             )
 
+# TODO update: restart on change
 
 class BaseInstance(Component):
     workdir = '{{component.zope.workdir}}'
