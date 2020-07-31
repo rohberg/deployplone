@@ -11,6 +11,8 @@ from batou.lib.file import File
 from batou.lib.git import Clone
 from batou.utils import Address
 
+import os.path
+
 # global configuration that is not individually for environments 
 configuration = {
     'apprepository': 'https://github.com/ksuess/schweikertruth.git',
@@ -19,7 +21,7 @@ configuration = {
 class Voltoapp(Component):
     apprepository = Attribute(str, configuration['apprepository'])
     address = Attribute(Address, 'localhost:3000')
-    razzleapipath = Attribute(str, 'localhost:11080/api') # TODO haproxy port eintragen
+    razzleapipath = Attribute(str, 'http://localhost:11080/Plone') # TODO haproxy port eintragen
 
     def configure(self):
         self.provide('voltoapp', self)
@@ -29,18 +31,29 @@ class Voltoapp(Component):
             vcs_update=True,
             )
 
-        voltoportandrazzle = 'PORT={} RAZZLE_API_PATH={}'.format( \
-            self.address.connect.port, self.razzleapipath)
-        self += VoltoappRebuild(voltoportandrazzle)
-
-
-class VoltoappRebuild(Component):
-
-    namevar = 'buildparameter'
-
     def verify(self):
-        self.parent.assert_file_is_current(self.workdir, ['package.json'])
+        self.assert_no_changes()
+        assert os.path.exists(self.workdir + "/build")
 
     def update(self):
-        self.cmd(self.buildparameter + ' yarn build')
-        print("VoltoApp rebuild")
+        if not os.path.exists(self.workdir + "/node_modules"):
+            self.cmd("yarn")
+        voltoportandrazzle = 'PORT={} RAZZLE_API_PATH={}'.format( \
+            self.address.connect.port, self.razzleapipath)
+        self.cmd(voltoportandrazzle + ' yarn build')
+        self.log("Voltoapp rebuild with {}".format(voltoportandrazzle))
+
+
+
+# class VoltoappRebuild(Component):
+
+#     namevar = 'buildparameter'
+
+#     def verify(self):
+#         self.assert_no_changes()
+#         assert os.path.exists(self.workdir + "/build")
+
+#     def update(self):
+#         if not os.path.exists(self.workdir + "/node_modules"):
+#             self.cmd("yarn")
+#         self.cmd(self.buildparameter + ' yarn build')

@@ -4,7 +4,7 @@ module.exports = {
       name: "{{component.voltoappname}}",
       script: "{{component.voltoapp.workdir}}/build/server.js",
       cwd: "{{component.voltoapp.workdir}}",
-      watch       : true,
+      watch: true,
       env: {
         "NODE_ENV": "production",
       },
@@ -55,8 +55,9 @@ module.exports = {
 // or ... --env development to start in development mode
 
 
-
 // see documentation:
 // https://pm2.keymetrics.io/docs/usage/application-declaration/
 
-// TOOD haproxy, zeo, zope, instances
+
+// TOOD haproxy or just leave it since it does not change
+// sudo haproxy -f double curly braces component.haproxy.workdir}}/haproxy.cfg
