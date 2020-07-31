@@ -3,7 +3,7 @@ rohbergplonedeployment
 
 Plone6 deployment with batou. 
 
-#Volto #ReactJS #Plone #Python  
+#Plone #Python #batou #ReactJS #Volto #pm2 #CMS
 
 stack
 ---------
@@ -14,6 +14,9 @@ stack
 * Plone
 
 pm2 for process management
+
+
+Open http://localhost:3000/ to access Volto app
 
 
 **Tip**
