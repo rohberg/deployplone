@@ -21,13 +21,17 @@ class Pm2(Component):
             'website.pm2.config.js', 
             source='website.pm2.config.js'
             )
-        self += RestartAll() 
+        self += RestartVoltoapp(self.voltoappname) 
 
 
-class RestartAll(Component):
+class RestartVoltoapp(Component):
+
+    namevar = 'appname'
 
     def verify(self):
-        raise UpdateNeeded()
+        self.voltoapp = self.require_one('voltoapp')
+        self.voltoapp.assert_no_changes()
 
     def update(self):
-        self.cmd("pm2 restart {} --watch".format(self.workdir + '/website.pm2.config.js'))
+        self.cmd("pm2 restart {} --watch".format(self.appname))
+        self.log('Restarted {}'.format(self.appname))

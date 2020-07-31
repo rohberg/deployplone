@@ -4,7 +4,7 @@ module.exports = {
       name: "{{component.voltoappname}}",
       script: "{{component.voltoapp.workdir}}/build/server.js",
       cwd: "{{component.voltoapp.workdir}}",
-      watch       : true,
+      watch: true,
       env: {
         "NODE_ENV": "production",
       },

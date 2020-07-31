@@ -17,6 +17,7 @@ class Zope(Component):
         self.provide('zopecommon', self)
         self.common = self.require_one('common', host=self.host)
         self.zope_instances = self.require('zope:http')
+        self.zope_instances.sort(key=lambda s: s.script_id)
         self.backupsdir = self.backupsdir or self.expand('{{component.workdir}}/var/backup')
 
         self += Buildout(
