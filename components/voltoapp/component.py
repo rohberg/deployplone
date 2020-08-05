@@ -39,20 +39,5 @@ class Voltoapp(Component):
             self.cmd("yarn")
         voltoportandrazzle = 'PORT={} RAZZLE_API_PATH={}'.format( \
             self.address.connect.port, self.razzleapipath)
-        self.cmd(voltoportandrazzle + ' yarn build')
+        self.cmd('{} yarn build'.format(voltoportandrazzle or ''))
         self.log("Voltoapp rebuild with {}".format(voltoportandrazzle))
-
-
-
-# class VoltoappRebuild(Component):
-
-#     namevar = 'buildparameter'
-
-#     def verify(self):
-#         self.assert_no_changes()
-#         assert os.path.exists(self.workdir + "/build")
-
-#     def update(self):
-#         if not os.path.exists(self.workdir + "/node_modules"):
-#             self.cmd("yarn")
-#         self.cmd(self.buildparameter + ' yarn build')
