@@ -26,14 +26,13 @@ class Voltoapp(Component):
     def configure(self):
         self.provide('voltoapp', self)
         self += Clone(
-            self.apprepository, 
-            revision='HEAD', 
-            vcs_update=True,
-            )
+            self.apprepository,
+            branch='master')
 
     def verify(self):
         self.assert_no_changes()
-        assert os.path.exists(self.workdir + "/build")
+        if not os.path.exists(self.workdir + '/build'):
+            raise UpdateNeeded()
 
     def update(self):
         if not os.path.exists(self.workdir + "/node_modules"):
