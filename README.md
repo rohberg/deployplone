@@ -5,7 +5,7 @@ Plone6 deployment with batou.
 
 **#Plone #Python #batou #ReactJS #Volto #pm2 #CMS**
 
-stack
+Stack
 ---------
 
 * Varnish
@@ -15,9 +15,35 @@ stack
 
 pm2 for process management
 
-local deployment:
-Open http://localhost:3000/ to access Volto app.
-Open http://localhost:11090/ to access Volto app via Varnish.
+Read more on pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/
+
+
+Local deployment on nginx
+--------------------------
+
+```
+upstream volto {
+    server localhost:3000;
+}
+upstream ploneapi {
+    server localhost:11080;
+}
+
+location ~ /api($|/.*) {
+  rewrite ^/api($|/.*) /VirtualHostBase/http/voltodeployment.example.com:80/Plone/VirtualHostRoot/_vh_api$1 break;
+  proxy_pass http://ploneapi;
+}
+
+location ~ / {
+  # Default set to 1m - this is mainly to make PSI happy, adjust to your needs
+  location ~* \.(ico|jpg|jpeg|png|gif|svg|js|jsx|css|less|swf|eot|ttf|otf|woff|woff2)$ {
+  add_header Cache-Control "public";
+  expires +1m;
+  proxy_pass http://volto;
+}
+````
+
+Open http://voltodeployment.example.com/ to access Volto app via Varnish.
 
 
 Troubleshooting
