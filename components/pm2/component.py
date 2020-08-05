@@ -22,6 +22,7 @@ class Pm2(Component):
             source='website.pm2.config.js'
             )
         self += RestartVoltoapp(self.voltoappname) 
+        # self += RestartZopeInstances(self.zopename)
 
 
 class RestartVoltoapp(Component):
@@ -35,3 +36,17 @@ class RestartVoltoapp(Component):
     def update(self):
         self.cmd("pm2 restart {} --watch".format(self.appname))
         self.log('Restarted {}'.format(self.appname))
+
+
+class RestartZopeInstances(Component):
+    """ Check if Plone or Plone add-ons changed and restart Zope instances if they did."""
+
+    namevar = 'appname'
+
+    def verify(self):
+        raise UpdateNeeded()
+
+    def update(self):
+        for zopeinstance in self.require("zope:http"):
+            self.cmd("pm2 restart {}-api-{}".format(self.appname, zopeinstance.script_id))
+        self.log("Zope instances restarted")
