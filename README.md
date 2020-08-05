@@ -3,7 +3,7 @@ rohbergplonedeployment
 
 Plone6 deployment with batou. 
 
-#Plone #Python #batou #ReactJS #Volto #pm2 #CMS
+**#Plone #Python #batou #ReactJS #Volto #pm2 #CMS**
 
 stack
 ---------
