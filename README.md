@@ -8,7 +8,7 @@ Plone6 deployment with batou.
 stack
 ---------
 
-* varnish
+* Varnish
 * Volto app
 * HAProxy
 * Plone
@@ -37,3 +37,8 @@ TODO
  
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
+
+Remarks
+-------
+
+HAProxy is not managed by pm2 as we expect its configuration not to change often.

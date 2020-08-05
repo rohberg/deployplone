@@ -51,7 +51,7 @@ module.exports = {
   ]
 };
 
-// start with pm2 restart <pathtofile>/website.pm2.config.js
+// start all with pm2 restart <pathtofile>/website.pm2.config.js
 // or ... --env development to start in development mode
 
 
