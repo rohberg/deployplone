@@ -25,7 +25,7 @@ class Varnish(Component):
         self += File('websiteplone.vcl', source='websiteplone.vcl')
         self.daemon = 'sbin/varnishd'
         self.daemonargs = self.expand(
-                '-F -f {{component.workdir}}/zhkath.vcl '
+                '-F -f {{component.workdir}}/websiteplone.vcl '
                 '-T localhost:{{component.control_port}} '
                 '-a {{component.address.listen}} '
                 '-p thread_pool_min=10 '

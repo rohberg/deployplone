@@ -15,8 +15,9 @@ stack
 
 pm2 for process management
 
-
-Open http://localhost:3000/ to access Volto app
+local deployment:
+Open http://localhost:3000/ to access Volto app.
+Open http://localhost:11090/ to access Volto app via Varnish.
 
 
 Troubleshooting
