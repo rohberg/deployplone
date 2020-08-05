@@ -5,6 +5,7 @@ TODO update voltoapp
 yarn build if repository has changes (package.json)
 """
 
+from batou import UpdateNeeded
 from batou.component import Attribute
 from batou.component import Component
 from batou.lib.file import File
