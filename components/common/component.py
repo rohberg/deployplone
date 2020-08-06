@@ -26,9 +26,9 @@ class SSH(Component):
 
         self += Directory('andermatt')
         self += Directory('andermatt/.ssh')        
-        # self += File('andermatt/.ssh', ensure='directory', mode=0o700)
+        self += File('andermatt/.ssh', ensure='directory', mode=0o700)
         self += File('andermatt/.ssh/config', source='ssh_config')
-        self += File('andermatt/.ssh/github', content=self.key, mode=0o600)
+        self += File('andermatt/.ssh/github_rsa', content=self.key, mode=0o600)
 
 
 class EnsurePermissions(Component):
