@@ -53,10 +53,20 @@ All processes running?
 
 `pm2 list`
 
+![alt text](./docs/pm2-list.png "pm2 list")
+
+
 Tips
 -----
 
-- cfgs in /zope/profile without Jinja
+- No Jinja in cfgs in /zope/profile
+
+Sugar
+-----
+
+`pm2 show local.mywebsite.ch-volto`
+
+shows even last git update date.
 
 
 TODO
