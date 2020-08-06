@@ -12,6 +12,7 @@ class Zope(Component):
     adminpw = 'admin'
     instance_name = 'zeoclientoderso'
     zeoaddress = Attribute(Address, '127.0.0.1:11981')
+    buildoutuser = Attribute(str, 'plone')
 
     def configure(self):
         self.provide('zopecommon', self)
