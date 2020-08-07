@@ -16,7 +16,7 @@ import os.path
 
 # global configuration that is not individually for environments 
 configuration = {
-    'apprepository': 'https://github.com/ksuess/schweikertruth.git',
+    'apprepository': 'git@github.com:ksuess/schweikertruth.git',
 }
 
 class Voltoapp(Component):
