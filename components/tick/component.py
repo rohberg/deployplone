@@ -8,7 +8,7 @@ class Tick(Component):
         self.common = self.require_one('common', host=self.host)
         self += File(
             'tick.sh',
-            mode=0755,
+            mode=0o700,
             content="""\
 #!/bin/bash
 while true; do
