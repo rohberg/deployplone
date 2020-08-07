@@ -2,6 +2,7 @@ from batou import UpdateNeeded
 from batou.component import Component, Attribute
 from batou.lib.cmmi import Build
 from batou.lib.file import File
+from batou.lib.python import VirtualEnv
 from batou.utils import Address
 
 # TODO -n name individually
@@ -17,6 +18,8 @@ class Varnish(Component):
         self.provide('varnish:http', self)
         self.purgehosts = self.require('zope:http')
         self.voltoapp = self.require_one('voltoapp')
+        
+        self += VirtualEnv('3.7')
 
         self += Build(
             'https://varnish-cache.org/_downloads/varnish-6.4.0.tgz',
