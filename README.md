@@ -1,25 +1,36 @@
 rohbergplonedeployment
 ======================
 
-Plone6 deployment with batou. 
+Plone 6 Volto deployment with Batou. 
 
 **#Plone #Python #batou #ReactJS #Volto #pm2 #CMS**
 
-Stack
----------
+## Stack
 
 * Varnish
 * Volto app
 * HAProxy
-* Plone
+* Plone (ZEO with two clients)
 
 pm2 for process management
 
-Read more on pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/
+## Documentation of tools and components used
 
+- Process management with pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/
+- Deployment with Batou https://batou.readthedocs.io
 
-Local deployment on nginx
---------------------------
+## HAProxy
+
+HAProxy is not managed by pm2 as we expect its configuration not to change often.
+
+Run haproxy with 
+
+```sudo haproxy -f /home/plone/schweikertstaging/work/haproxy/haproxy.cfg ```
+
+cfg will drop privileges to user haproxy.
+
+## Local deployment on nginx
+
 
 ```
 upstream volto {
@@ -46,8 +57,8 @@ location ~ / {
 Open http://voltodeployment.example.com/ to access Volto app via Varnish.
 
 
-Troubleshooting
------------------
+## Troubleshooting
+
 
 All processes running?
 
@@ -56,26 +67,21 @@ All processes running?
 ![alt text](./docs/pm2-list.png "pm2 list")
 
 
-Tips
------
+## Tips
+
 
 - No Jinja in cfgs in /zope/profile
 
-Sugar
------
+## Sugar
 
 `pm2 show local.mywebsite.ch-volto`
 
 shows even last git update date.
 
 
-TODO
-------
+## TODO
  
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
 
-Remarks
--------
-
-HAProxy is not managed by pm2 as we expect its configuration not to change often.
+## Remarks
