@@ -14,6 +14,13 @@ Plone 6 Volto deployment with Batou.
 
 pm2 for process management
 
+
+# How do I use this template to setup deployment with my Volto app?
+
+![alt text](./docs/ksuess_rohbergplonedeployment__usetemplate.png "use template rohbergplonedeployment")
+
+Create your repository from this template. Customize it: your Volto app, current Plone version, etc..
+
 ## Documentation of tools and components used
 
 - Process management with pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/
@@ -80,7 +87,8 @@ shows even last git update date.
 
 
 ## TODO
- 
+
+- TODO Remove all Rohberg project traces from this template
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
 
