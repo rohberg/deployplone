@@ -12,7 +12,7 @@ class HAProxy(Component):
     jail_dir = Attribute(str, '{{component.workdir}}/jail')
 
     def configure(self):
-        # self.provide('haproxy:frontend', self)
+        self.provide('haproxy:frontend', self)
 
         self.bindspec = str(self.address.listen)
         if '127.0.0.1:' + self.port not in self.bindspec:

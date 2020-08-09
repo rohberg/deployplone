@@ -18,6 +18,7 @@ class Varnish(Component):
         self.provide('varnish:http', self)
         self.purgehosts = self.require('zope:http')
         self.voltoapp = self.require_one('voltoapp')
+        self.haproxy = self.require_one('haproxy:frontend')
         
         self += VirtualEnv('3.7')
 

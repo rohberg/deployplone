@@ -14,6 +14,10 @@ backend default {
     .host = "{{component.voltoapp.address.connect.host}}";
     .port = "{{component.voltoapp.address.connect.port}}";
 }
+backend api {
+    .host = "{{component.haproxy.address.connect.host}}";
+    .port = "{{component.haproxy.address.connect.port}}";
+}
 
 acl purge {
     "127.0.0.1";
@@ -34,7 +38,13 @@ sub vcl_recv {
         return (purge);
     }
 
-
+    # backends Plone and Volto
+    if (req.url ~ "^/VirtualHostBase/") {
+        set req.backend_hint = api;
+    } else {
+        set req.backend_hint = default;
+    }
+    
     # Remove PIWIK Matomo Cookies
     set req.http.Cookie = regsuball(req.http.Cookie, "_pk_.=[^;]+(; )?", "");
     set req.http.Cookie = regsuball(req.http.Cookie, "MATOMO_SESSID.=[^;]+(; )?", "");
