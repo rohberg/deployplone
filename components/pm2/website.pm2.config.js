@@ -28,6 +28,7 @@ module.exports = {
       args: "console",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      watch: ["{{component.zopecommon.workdir}}"],
       min_uptime: 10000,
       kill_timeout : 3000,
     },
@@ -37,6 +38,7 @@ module.exports = {
       args: "console",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      watch: ["{{component.zopecommon.workdir}}"],
       min_uptime: 10000,
       kill_timeout : 3000,
     },
@@ -59,5 +61,4 @@ module.exports = {
 // https://pm2.keymetrics.io/docs/usage/application-declaration/
 
 
-// TOOD haproxy or just leave it since it does not change
-// sudo haproxy -f double curly braces component.haproxy.workdir}}/haproxy.cfg
+// TOOD restart Zope instances on batou run

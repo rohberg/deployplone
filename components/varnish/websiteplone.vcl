@@ -24,24 +24,6 @@ acl purge {
 
 
 sub vcl_recv {
-
-    # return(synth(404, req.url ~ "/VirtualHostBase/https/staging.zhkath.ch"));
-
-    # if (req.url ~ "^zhkath.ch") {
-    #     set req.backend_hint = staging;
-    #     # } elsif (req.url ~ "/VirtualHostBase/https/www.zhkath.ch") {
-    #     #    set req.backend_hint = productive;
-    # } else {
-    #     set req.backend_hint = nirvana;
-    # }
-
-    # Happens before we check if we have this in cache already.
-    #
-    # Typically you clean up the request here, removing cookies you don't need,
-    # rewriting the request, etc.
-
-    # return 'pass' if object should not be taken from cache
-
     if (req.method == "PURGE") {
         if (!client.ip ~purge) {
             # error 405 "Not allowed.";
@@ -221,15 +203,58 @@ sub vcl_backend_response {
 }
 
 
-sub vcl_backend_error {
-      if (beresp.status == 503 && bereq.retries == 3) {
-          synthetic(std.fileread("/var/www/vhosts/zhkath.ch/httpdocs/error_docs/503.html"));
-          return(deliver);
-       } else {
-          return(retry);
-       }
- }
+// sub vcl_backend_error {
+//       if (beresp.status == 503 && bereq.retries == 3) {
+//           synthetic(std.fileread("/var/www/vhosts/mywebsite.ch/httpdocs/error_docs/503.html"));
+//           return(deliver);
+//        } else {
+//           return(retry);
+//        }
+//  }
 
+
+# vcl_backend_error: This subroutine is called if we fail the backend fetch.
+# See https://www.varnish-cache.org/docs/4.0/users-guide/vcl-built-in-subs.html#vcl-backend-error
+sub vcl_backend_error {
+
+  /* Try to restart request in case of failure */
+  #TODO# Confirm max_retries default value
+  # SeeV3 https://www.varnish-cache.org/trac/wiki/VCLExampleRestarts
+  if ( bereq.retries < 4 ) {
+    return (retry);
+  }
+
+  /* Debugging headers */
+  # Please consider the risks of showing publicly this information, we can wrap
+  # this with an ACL.
+  # Retry count
+  if ( bereq.retries > 0 ) {
+    set beresp.http.X-Varnish-Retries = bereq.retries;
+  }
+
+  set beresp.http.Content-Type = "text/html; charset=utf-8";
+  set beresp.http.Retry-After = "5";
+  synthetic( {"<!DOCTYPE html>
+<html>
+  <head>
+    <title>"} + beresp.status + " " + beresp.reason + {"</title>
+  </head>
+  <body>
+    <h1>Error "} + beresp.status + " " + beresp.reason + {"</h1>
+    <p>"} + beresp.reason + {"</p>
+    <h3>Something went wrong:</h3>
+    <p>XID: "} + bereq.xid + {"</p>
+    <hr>
+    <p>Varnish cache server</p>
+  </body>
+</html>
+"} );
+
+  /* Bypass built-in logic */
+  # We make sure no built-in logic is processed after ours returning at this
+  # point.
+  return (deliver);
+}
 
 sub vcl_deliver {
     # Happens when we have all the pieces we need, and are about to send the

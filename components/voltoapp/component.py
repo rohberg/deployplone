@@ -42,8 +42,7 @@ class Voltoapp(Component):
         # yarn production build
         if not os.path.exists(self.workdir + "/node_modules"):
             self.cmd("yarn")
-        port = self.address.connect.port  # if not using varnish in front of Volto app
-        # port = self.varnish.address.connect.port
+        port = self.address.connect.port
         voltoportandrazzle = 'PORT={} RAZZLE_API_PATH={}'.format( \
             port, self.razzleapipath)
         self.cmd('{} yarn build'.format(voltoportandrazzle or ''))

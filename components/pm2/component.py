@@ -34,7 +34,7 @@ class RestartVoltoapp(Component):
         self.voltoapp.assert_no_changes()
 
     def update(self):
-        self.cmd("pm2 restart {} --watch".format(self.appname))
+        self.cmd("pm2 restart {}".format(self.appname))
         self.log('Restarted {}'.format(self.appname))
 
 

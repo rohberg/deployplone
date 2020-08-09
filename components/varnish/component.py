@@ -38,7 +38,7 @@ class Varnish(Component):
             )
         print("varnish self.daemon", self.daemon)
 
-        # self += PurgeCache() TODO purge cache on batou run. see pm2
+        self += PurgeCache()
 
 
 class PurgeCache(Component):
@@ -51,7 +51,7 @@ class PurgeCache(Component):
     def update(self):
         self.cmd(self.expand(
             '{{component.varnishadm}}'
-            ' -S {{component.workdir}}/var/varnish/zhkath/_.secret'
+            ' -S {{component.workdir}}/var/varnish/websitesomething/_.secret'
             ' -T "localhost:{{component.parent.control_port}}"'
             ' "ban req.url ~ .*"')
         )

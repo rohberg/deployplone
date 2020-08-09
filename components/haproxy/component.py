@@ -1,5 +1,5 @@
 from batou.component import Component, Attribute, platform
-from batou.lib.file import File
+from batou.lib.file import File, Directory
 from batou.utils import Address
 
 
@@ -9,7 +9,7 @@ class HAProxy(Component):
     port = '11080'
     address = Attribute(Address, 'localhost:11080')
     stats_socket = Attribute(str, '{{component.workdir}}/haproxy_admin.sock')
-    jail_dir = Attribute(str, '/tmp')
+    jail_dir = Attribute(str, '{{component.workdir}}/jail')
 
     def configure(self):
         # self.provide('haproxy:frontend', self)
@@ -26,6 +26,7 @@ class HAProxy(Component):
             self.expand('{{component.workdir}}/haproxy.cfg'),
             source='haproxy.cfg'
         )
+        self += Directory('jail')
 
 
 @platform('ubuntu', HAProxy)

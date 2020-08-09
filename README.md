@@ -21,6 +21,21 @@ pm2 for process management
 
 Create your repository from this template. Customize it: your Volto app, current Plone version, etc..
 
+Steps
+- Create a repository from this template
+- Clone your repository locally
+- run ./batou
+- customize your first environment local.cfg
+- deploy to your first environment with ./batou deploy local 
+- find your new environment in ./work/
+- start with pm2 start ./work/pm2/website.pm2.config.js
+- see processes with pm2 list 
+- start haproxy with sudo haproxy -f path-to-your-project/work/haproxy/haproxy.cfg
+
+- create new environment: environment/mars.cfg
+- deploy to mars with ./batou deploy mars
+
+
 ## Documentation of tools and components used
 
 - Process management with pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/
