@@ -53,5 +53,6 @@ class PurgeCache(Component):
             '{{component.varnishadm}}'
             ' -S {{component.workdir}}/var/varnish/websitesomething/_.secret'
             ' -T "localhost:{{component.parent.control_port}}"'
-            ' "ban req.url ~ .*"')
+            ' "ban req.url ~ .*"'),
+            ignore_returncode=True
         )
