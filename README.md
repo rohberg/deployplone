@@ -35,6 +35,7 @@ Steps
 - create new environment: environment/mars.cfg
 - deploy to mars with ./batou deploy mars
 
+- Install kitconcept.volto in http://localhost:8080/Plone/prefs_install_products_form
 
 ## Documentation of tools and components used
 
