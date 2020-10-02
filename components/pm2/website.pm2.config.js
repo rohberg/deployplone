@@ -4,7 +4,7 @@ module.exports = {
       name: "{{component.voltoappname}}",
       script: "{{component.voltoapp.workdir}}/build/server.js",
       cwd: "{{component.voltoapp.workdir}}",
-      watch: true,
+      watch: false,
       env: {
         "NODE_ENV": "production",
       },
@@ -19,6 +19,7 @@ module.exports = {
       args: "fg",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
+      watch: false,
       min_uptime: 10000,
       kill_timeout: 3000,
     },
@@ -28,7 +29,7 @@ module.exports = {
       args: "console",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
-      watch: ["{{component.zopecommon.workdir}}"],
+      watch: false,
       min_uptime: 10000,
       kill_timeout : 3000,
     },
@@ -38,7 +39,7 @@ module.exports = {
       args: "console",
       cwd: "{{component.zopecommon.workdir}}",
       interpreter: "{{component.zopecommon.workdir}}/bin/python",
-      watch: ["{{component.zopecommon.workdir}}"],
+      watch: false,
       min_uptime: 10000,
       kill_timeout : 3000,
     },
@@ -48,6 +49,7 @@ module.exports = {
       script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
       args: "{{component.varnish.daemonargs}}",
       cwd: "{{component.varnish.workdir}}",
+      watch: false,
     },
 
   ]
