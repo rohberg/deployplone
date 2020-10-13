@@ -2,4 +2,5 @@ StrictHostKeyChecking no
 Host github.com
     Hostname ssh.github.com
     User rohbergdeployment
-    Port 443IdentityFile ~/.ssh/id_rsa
+    Port 443
+    IdentityFile ~/.ssh/id_rsa
