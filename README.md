@@ -102,6 +102,18 @@ All processes running?
 shows even last git update date.
 
 
+# How do I use this for a development setup of Plone + Volto?
+
+run
+
+`./batou deploy dev`
+
+and open
+
+http://localhost:11991
+
+
+
 ## TODO
 
 - TODO Remove all Rohberg project traces from this template
