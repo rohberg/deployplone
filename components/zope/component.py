@@ -10,7 +10,7 @@ from batou.utils import Address
 class Zope(Component):
     standalone = Attribute(str, 'zeo')
     backupsdir = Attribute(str, '')
-    adminpw = 'admin'
+    adminpw = Attribute(str, 'admin')
     zeoaddress = Attribute(Address, '127.0.0.1:11981')
     buildoutuser = Attribute(str, 'plone')
 
@@ -21,12 +21,20 @@ class Zope(Component):
         self.zope_instances.sort(key=lambda s: s.script_id)
         self.backupsdir = self.backupsdir or self.expand('{{component.workdir}}/var/backup')
 
-        config_file_name = (self.standalone=='standalone' and 'standalone.cfg') or 'buildout.cfg'
-        additional_config = [Directory('profiles', source='profiles')]
-        if self.standalone=='standalone':
-            additional_config.append(File(
+        config = (self.standalone=='standalone' and File(
                 'standalone.cfg', 
                 source='standalone.cfg',
+                template_context=self
+            )) or File(
+                'buildout.cfg', 
+                source='buildout.cfg',
+                template_context=self
+            )
+        additional_config = [Directory('profiles', source='profiles')]
+        if self.standalone == 'standalone':
+            additional_config.append(File(
+                'buildout.cfg', 
+                source='buildout.cfg',
                 template_context=self
                 ))
 
@@ -34,14 +42,12 @@ class Zope(Component):
             python='3.7', 
             version=self.common.zc_buildout, 
             setuptools=self.common.setuptools,
-            config_file_name = config_file_name,
+            config = config,
             additional_config = additional_config
-            )        
-        self.log("self.standalone: " + self.standalone)
-        self.log("self.zope_instances: " + str(self.zope_instances))
-        self.log("self.config_file_name: " + config_file_name)
+            )
 
-# TODO update: restart on change
+# TODO if buildout ran: restart via pm2
+# TODO checkout development packages and restart via pm2
 
 class BaseInstance(Component):
     workdir = '{{component.zope.workdir}}'
