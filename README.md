@@ -48,7 +48,7 @@ HAProxy is not managed by pm2 as we expect its configuration not to change often
 
 Run haproxy with 
 
-```sudo haproxy -f /home/plone/schweikertstaging/work/haproxy/haproxy.cfg ```
+```sudo haproxy -f /home/plone/myprojectstaging/work/haproxy/haproxy.cfg ```
 
 cfg will drop privileges to user haproxy.
 
