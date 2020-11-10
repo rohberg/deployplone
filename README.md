@@ -116,6 +116,7 @@ http://localhost:11991
 
 ## TODO
 
+- TODO development installation (standalone) option: without component 'voltoapp'
 - TODO Remove all Rohberg project traces from this template
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
