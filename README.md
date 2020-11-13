@@ -37,6 +37,16 @@ Steps
 
 - Install kitconcept.volto in http://localhost:8080/Plone/prefs_install_products_form
 
+
+# How do I use this template to setup a Plone standalone without Volto and Varnish and HAPROXY?
+
+configure your local environment dev.cfg:
+
+``
+[pm2]
+dev = plonestandalone
+``
+
 ## Documentation of tools and components used
 
 - Process management with pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/

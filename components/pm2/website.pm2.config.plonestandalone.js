@@ -38,35 +38,6 @@ if ("{{component.zopecommon.standalone}}" != 'standalone') {
   )
 }
 
-if ("{{component.voltoappname}}"!=='') {
-  this.apps.push(
-    {
-      name: "{{component.voltoappname}}",
-      script: "{{component.voltoapp.workdir}}/build/server.js",
-      cwd: "{{component.voltoapp.workdir}}",
-      watch: false,
-      env: {
-        "NODE_ENV": "production",
-      },
-      env_development : {
-         "NODE_ENV": "development"
-      }
-    }
-  )
-}
-
-
-if ("{{component.varnishname}}"!=='') {
-  this.apps.push(
-    {
-      name: "{{component.varnishname}}",
-      script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
-      args: "{{component.varnish.daemonargs}}",
-      cwd: "{{component.varnish.workdir}}",
-      watch: false,
-    }
-  )
-}
 
 module.exports = { apps: apps };
 
