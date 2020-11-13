@@ -23,7 +23,7 @@ class Varnish(Component):
         self += VirtualEnv('3.7')
 
         self += Build(
-            'https://varnish-cache.org/_downloads/e2a305a110260371a068ba3f22f10233/varnish-6.5.1.tgz',
+            'http://varnish-cache.org/_downloads/varnish-6.5.1.tgz',
             checksum='sha256:11964c688f9852237c99c1e327d54dc487549ddb5f0f5aa7996e521333d7cdb5',
         )
         self += File('websiteplone.vcl', source='websiteplone.vcl')
