@@ -18,11 +18,6 @@ class Pm2(Component):
         self.voltoapp = self.voltoappname and self.require_one('voltoapp')
         self.varnish = self.varnishname and self.require_one('varnish:http')
         self.zopecommon = self.require_one('zopecommon')
-        if self.dev == 'plonestandalone':
-            self += File(
-                'website.pm2.config.plonestandalone.js', 
-                source='website.pm2.config.js'
-                )
         else:
             self += File(
                 'website.pm2.config.js', 

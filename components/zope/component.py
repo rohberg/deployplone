@@ -8,7 +8,6 @@ from batou.utils import Address
 
 
 class Zope(Component):
-    standalone = Attribute(str, 'zeo')
     backupsdir = Attribute(str, '')
     adminpw = Attribute(str, 'admin')
     zeoaddress = Attribute(Address, '127.0.0.1:11981')
@@ -21,25 +20,15 @@ class Zope(Component):
         self.zope_instances.sort(key=lambda s: s.script_id)
         self.backupsdir = self.backupsdir or self.expand('{{component.workdir}}/var/backup')
 
-        config = (self.standalone=='standalone' and File(
-                'standalone.cfg', 
-                source='standalone.cfg',
-                template_context=self
-            )) or File(
-                'buildout.cfg', 
-                source='buildout.cfg',
-                template_context=self
+        config = File(
+            'buildout.cfg', 
+            source='buildout.cfg',
+            template_context=self
             )
         additional_config = [Directory('profiles', source='profiles')]
-        if self.standalone == 'standalone':
-            additional_config.append(File(
-                'buildout.cfg', 
-                source='buildout.cfg',
-                template_context=self
-                ))
 
         self += Buildout(
-            python='3.7', 
+            python='3.8', 
             version=self.common.zc_buildout, 
             setuptools=self.common.setuptools,
             config = config,

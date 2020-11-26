@@ -9,64 +9,47 @@ apps = [
     min_uptime: 10000,
     kill_timeout : 3000,
   },
+  {
+    name: "{{component.zopename}}-api-zeoserver",
+    script: "{{component.zopecommon.workdir}}/bin/zeoserver",
+    args: "fg",
+    cwd: "{{component.zopecommon.workdir}}",
+    interpreter: "{{component.zopecommon.workdir}}/bin/python",
+    watch: false,
+    min_uptime: 10000,
+    kill_timeout: 3000,
+  },
+  {
+    name: "{{component.zopename}}-api-instance2",
+    script: "{{component.zopecommon.workdir}}/bin/instance2",
+    args: "console",
+    cwd: "{{component.zopecommon.workdir}}",
+    interpreter: "{{component.zopecommon.workdir}}/bin/python",
+    watch: false,
+    min_uptime: 10000,
+    kill_timeout : 3000,
+  },
+  {
+    name: "{{component.voltoappname}}",
+    script: "{{component.voltoapp.workdir}}/build/server.js",
+    cwd: "{{component.voltoapp.workdir}}",
+    watch: false,
+    env: {
+      "NODE_ENV": "production",
+    },
+    env_development : {
+       "NODE_ENV": "development"
+    }
+  },
+  {
+    name: "{{component.varnishname}}",
+    script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
+    args: "{{component.varnish.daemonargs}}",
+    cwd: "{{component.varnish.workdir}}",
+    watch: false,
+  }
 ]
 
-if ("{{component.zopecommon.standalone}}" != 'standalone') {
-  apps.push(
-    {
-      name: "{{component.zopename}}-api-zeoserver",
-      script: "{{component.zopecommon.workdir}}/bin/zeoserver",
-      args: "fg",
-      cwd: "{{component.zopecommon.workdir}}",
-      interpreter: "{{component.zopecommon.workdir}}/bin/python",
-      watch: false,
-      min_uptime: 10000,
-      kill_timeout: 3000,
-    },
-  )
-  apps.push(
-    {
-      name: "{{component.zopename}}-api-instance2",
-      script: "{{component.zopecommon.workdir}}/bin/instance2",
-      args: "console",
-      cwd: "{{component.zopecommon.workdir}}",
-      interpreter: "{{component.zopecommon.workdir}}/bin/python",
-      watch: false,
-      min_uptime: 10000,
-      kill_timeout : 3000,
-    }
-  )
-}
-
-if ("{{component.voltoappname}}"!=='') {
-  this.apps.push(
-    {
-      name: "{{component.voltoappname}}",
-      script: "{{component.voltoapp.workdir}}/build/server.js",
-      cwd: "{{component.voltoapp.workdir}}",
-      watch: false,
-      env: {
-        "NODE_ENV": "production",
-      },
-      env_development : {
-         "NODE_ENV": "development"
-      }
-    }
-  )
-}
-
-
-if ("{{component.varnishname}}"!=='') {
-  this.apps.push(
-    {
-      name: "{{component.varnishname}}",
-      script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
-      args: "{{component.varnish.daemonargs}}",
-      cwd: "{{component.varnish.workdir}}",
-      watch: false,
-    }
-  )
-}
 
 module.exports = { apps: apps };
 
