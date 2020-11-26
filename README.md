@@ -113,6 +113,7 @@ shows even last git update date.
 ## TODO
 
 - TODO Remove all Rohberg project traces from this template
+- # TODO plone.restapi installieren! See [plonesite]
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
 
