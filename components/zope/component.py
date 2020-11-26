@@ -25,7 +25,12 @@ class Zope(Component):
             source='buildout.cfg',
             template_context=self
             )
-        additional_config = [Directory('profiles', source='profiles')]
+        buildout_general = File(
+            'buildout_general.cfg', 
+            source='buildout_general.cfg',
+            template_context=self
+            )
+        additional_config = [buildout_general, Directory('profiles', source='profiles', template_context=self)]
 
         self += Buildout(
             python='3.8', 
