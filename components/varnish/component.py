@@ -20,7 +20,7 @@ class Varnish(Component):
         self.voltoapp = self.require_one('voltoapp')
         self.haproxy = self.require_one('haproxy:frontend')
         
-        self += VirtualEnv('3.7')
+        self += VirtualEnv('3.8')
 
         self += Build(
             'http://varnish-cache.org/_downloads/varnish-6.5.1.tgz',
