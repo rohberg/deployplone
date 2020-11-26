@@ -109,3 +109,5 @@ dist
 .tern-port
 
 
+environments/dev.cfg
+components/zope/buildout.cfg
