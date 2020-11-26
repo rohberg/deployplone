@@ -8,24 +8,21 @@ from batou.lib.git import Clone
 
 class Pm2(Component):
 
-    dev = Attribute(str, '')
     voltoappname = Attribute(str, '')
     varnishname = Attribute(str, '')
-    zopename = Attribute(str, "environment.website-zope")
+    zopename = Attribute(str, '')
 
     def configure(self):
         # self.provide('pm2', self)
-        self.voltoapp = self.voltoappname and self.require_one('voltoapp')
-        self.varnish = self.varnishname and self.require_one('varnish:http')
+        self.voltoapp = self.require_one('voltoapp')
+        self.varnish = self.require_one('varnish:http')
         self.zopecommon = self.require_one('zopecommon')
-        else:
-            self += File(
-                'website.pm2.config.js', 
-                source='website.pm2.config.js'
-                )
-        if self.voltoappname:
-            self += RestartVoltoapp(self.voltoappname) 
-        # self += RestartZopeInstances(self.zopename)
+        self += File(
+            'website.pm2.config.js', 
+            source='website.pm2.config.js'
+            )
+        RestartVoltoapp(self.voltoappname) 
+        self += RestartZopeInstances(self.zopename)
 
 
 class RestartVoltoapp(Component):
