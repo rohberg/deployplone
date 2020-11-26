@@ -38,15 +38,6 @@ Steps
 - Install kitconcept.volto in http://localhost:8080/Plone/prefs_install_products_form
 
 
-# How do I use this template to setup a Plone standalone without Volto and Varnish and HAPROXY?
-
-configure your local environment dev.cfg:
-
-``
-[pm2]
-dev = plonestandalone
-``
-
 ## Documentation of tools and components used
 
 - Process management with pm2: https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/
@@ -61,6 +52,12 @@ Run haproxy with
 ```sudo haproxy -f /home/plone/myprojectstaging/work/haproxy/haproxy.cfg ```
 
 cfg will drop privileges to user haproxy.
+
+## Elasticsearch
+
+- Plone egg collective.elasticsearch
+- component ElasticSearch (TODO) https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html
+
 
 ## Local deployment on nginx
 
@@ -112,21 +109,9 @@ All processes running?
 shows even last git update date.
 
 
-# How do I use this for a development setup of Plone + Volto?
-
-run
-
-`./batou deploy dev`
-
-and open
-
-http://localhost:11991
-
-
 
 ## TODO
 
-- TODO development installation (standalone) option: without component 'voltoapp'
 - TODO Remove all Rohberg project traces from this template
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
