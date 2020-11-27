@@ -39,6 +39,11 @@ class Zope(Component):
             config = config,
             additional_config = additional_config
             )
+        # some ElasticSearch, Celery configuration
+        self += File(
+            self.expand('{{component.workdir}}/.env'),
+            source='_env'
+        )
 
 # TODO if buildout ran: restart via pm2
 # TODO checkout development packages and restart via pm2

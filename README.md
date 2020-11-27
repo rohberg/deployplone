@@ -10,7 +10,8 @@ Plone 6 Volto deployment with Batou.
 * Varnish
 * Volto app
 * HAProxy
-* Plone (ZEO with two clients)
+* Plone (ZEO with two or more clients)
+* ElasticSearch
 
 pm2 for process management
 
@@ -55,8 +56,8 @@ cfg will drop privileges to user haproxy.
 
 ## Elasticsearch
 
-- Plone egg collective.elasticsearch
-- component ElasticSearch (TODO) https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html
+- ElasticSearch in Plone with collective.elastic.plone https://github.com/collective/collective.elastic.plone
+- component ElasticSearch https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html
 
 
 ## Local deployment on nginx
@@ -112,8 +113,8 @@ shows even last git update date.
 
 ## TODO
 
-- TODO Remove all Rohberg project traces from this template
-- # TODO plone.restapi installieren! See [plonesite]
+- Remove all Rohberg project traces from this template
+- plone.restapi installieren! See [plonesite]
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
 
