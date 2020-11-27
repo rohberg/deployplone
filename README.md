@@ -1,7 +1,7 @@
-rohbergplonedeployment
-======================
+Deploy Plone with Varnish, HAProxy, Volto and ElasticSearch
+===========================================================
 
-Plone 6 Volto deployment with Batou. 
+Plone 6 Volto deployment with Batou and pm2 process manager. 
 
 **#Plone #Python #batou #ReactJS #Volto #pm2 #CMS**
 
