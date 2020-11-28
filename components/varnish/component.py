@@ -37,7 +37,6 @@ class Varnish(Component):
                 '-s malloc,250M '
                 '-n websitesomething'
             )
-        print("varnish self.daemon", self.daemon)
 
         self += PurgeCache()
 
