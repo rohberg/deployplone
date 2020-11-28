@@ -1,6 +1,6 @@
 apps = [
   {
-    name: "{{component.zopename}}-api-instance1",
+    name: "{{component.pm2prefix}}zope-instance1",
     script: "{{component.zopecommon.workdir}}/bin/instance1",
     args: "console",
     cwd: "{{component.zopecommon.workdir}}",
@@ -10,17 +10,7 @@ apps = [
     kill_timeout : 3000,
   },
   {
-    name: "{{component.zopename}}-api-zeoserver",
-    script: "{{component.zopecommon.workdir}}/bin/zeoserver",
-    args: "fg",
-    cwd: "{{component.zopecommon.workdir}}",
-    interpreter: "{{component.zopecommon.workdir}}/bin/python",
-    watch: false,
-    min_uptime: 10000,
-    kill_timeout: 3000,
-  },
-  {
-    name: "{{component.zopename}}-api-instance2",
+    name: "{{component.pm2prefix}}zope-instance2",
     script: "{{component.zopecommon.workdir}}/bin/instance2",
     args: "console",
     cwd: "{{component.zopecommon.workdir}}",
@@ -30,7 +20,17 @@ apps = [
     kill_timeout : 3000,
   },
   {
-    name: "{{component.voltoappname}}",
+    name: "{{component.pm2prefix}}zope-zeoserver",
+    script: "{{component.zopecommon.workdir}}/bin/zeoserver",
+    args: "fg",
+    cwd: "{{component.zopecommon.workdir}}",
+    interpreter: "{{component.zopecommon.workdir}}/bin/python",
+    watch: false,
+    min_uptime: 10000,
+    kill_timeout: 3000,
+  },
+  {
+    name: "{{component.pm2prefix}}voltoapp",
     script: "{{component.voltoapp.workdir}}/build/server.js",
     cwd: "{{component.voltoapp.workdir}}",
     watch: false,
@@ -42,12 +42,35 @@ apps = [
     }
   },
   {
-    name: "{{component.varnishname}}",
+    name: "{{component.pm2prefix}}varnish",
     script: "{{component.varnish.workdir}}/{{component.varnish.daemon}}",
     args: "{{component.varnish.daemonargs}}",
     cwd: "{{component.varnish.workdir}}",
     watch: false,
-  }
+  },
+  // {
+  //   name: "{{component.pm2prefix}}elasticsearch",
+  //   script: "{{component.elasticsearch.workdir}}/bin/elasticsearch -d",
+  //   cwd: "{{component.elasticsearch.workdir}}",
+  //   watch: false,
+  // },
+  // {
+  //   name: "{{component.pm2prefix}}ingest",
+  //   script: "{{component.zopecommon.workdir}}/bin/celery -A collective.elastic.ingest.celery.app worker --detach",
+  //   cwd: "{{component.zopecommon.workdir}}",
+  //   env: {
+  //     "CELERY_BROKER=redis://localhost:6379/0": "redis://localhost:6379/0",
+  //     "ELASTICSEARCH_INGEST_SERVER": "localhost:9200",
+  //     "ELASTICSEARCH_INGEST_USE_SSL": "0",
+  //     "PLONE_SERVICE": "http://localhost:8080",
+  //     "PLONE_PATH": "Plone",
+  //     "PLONE_USER": "admin",
+  //     "PLONE_PASSWORD": "admin",
+  //     "MAPPINGS_FILE": "{{component.workdir}}/elasticsearch-mappings.json",
+  //     "PREPROCESSINGS_FILE": "{{component.workdir}}/elasticsearch-preprocessings.json",
+  //   },
+  //   watch: false,
+  // }
 ]
 
 

@@ -8,20 +8,19 @@ from batou.lib.git import Clone
 
 class Pm2(Component):
 
-    voltoappname = Attribute(str, '')
-    varnishname = Attribute(str, '')
-    zopename = Attribute(str, '')
+    pm2prefix = Attribute(str, 'local.mydomain.ch-')
 
     def configure(self):
         # self.provide('pm2', self)
         self.voltoapp = self.require_one('voltoapp')
         self.varnish = self.require_one('varnish:http')
         self.zopecommon = self.require_one('zopecommon')
+        self.elasticsearch = self.require_one('elasticsearch')
         self += File(
             'website.pm2.config.js', 
             source='website.pm2.config.js'
             )
-        RestartTasks('all')
+        self += RestartTasks('all')
 
 
 class RestartTasks(Component):
@@ -32,5 +31,5 @@ class RestartTasks(Component):
         raise UpdateNeeded()
 
     def update(self):
-        self.cmd('pm2 start ./work/pm2/website.pm2.config.js')
+        self.cmd('pm2 start {{component.workdir}}/website.pm2.config.js')
         self.log('Restarted tasks')
