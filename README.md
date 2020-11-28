@@ -26,17 +26,31 @@ Steps
 - Create a repository from this template
 - Clone your repository locally
 - run ./batou
-- customize your first environment local.cfg
-- deploy to your first environment with ./batou deploy local 
+- customize your first environment dev.cfg
+- deploy to your first environment with ./batou deploy dev 
 - find your new environment in ./work/
 - start with pm2 start ./work/pm2/website.pm2.config.js
 - see processes with pm2 list 
 - start haproxy with sudo haproxy -f path-to-your-project/work/haproxy/haproxy.cfg
+- start redis: redis-server /usr/local/etc/redis.conf
+- install ingest plugin for elasticsearch:
+    ```
+    cd work/elasticsearch
+    bin/elasticsearch-plugin install ingest-attachment
+    ```
+- start eleasticsearch
+    `./bin/elasticsearch -d`
+- start ingest
+    ````
+    cd work/zope
+    bin/celery -A collective.elastic.ingest.celery.app worker --detach
+    ```
 
 - create new environment: environment/mars.cfg
 - deploy to mars with ./batou deploy mars
 
-- Install kitconcept.volto in http://localhost:8080/Plone/prefs_install_products_form
+- Activate kitconcept.volto in control panel of plone instance http://localhost:8080/Plone/prefs_install_products_form
+- Activate plone.restapi and collective.elastic.plone 
 
 
 ## Documentation of tools and components used
@@ -115,6 +129,8 @@ shows even last git update date.
 
 - Remove all Rohberg project traces from this template
 - plone.restapi installieren! See [plonesite]
+- Installation and start of redis via batou
+- Installation elasticsearch plugin ingest
 - Continuous integration has not been set up. 
 GitHub Actions and several other apps can be used to automatically catch bugs and enforce style. 
 
