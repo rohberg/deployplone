@@ -1,3 +1,4 @@
+from batou import UpdateNeeded
 from batou.component import Attribute
 from batou.component import Component
 from batou.lib.buildout import Buildout
@@ -39,26 +40,49 @@ class Zope(Component):
             config = config,
             additional_config = additional_config
             )
-        # some ElasticSearch, Celery configuration
-        self += File(
-            self.expand('{{component.workdir}}/.env'),
+
+        self += InstallPythonPackages()
+
+                # some ElasticSearch, Celery configuration
+        self += File('elasticsearch-mappings.json',
+            source='elasticsearch-mappings.json'
+            )
+        self += File('elasticsearch-preprocessings.json',
+            source='elasticsearch-preprocessings.json'
+        )
+        self += File('.env',
             source='_env',
             template_context=self
             )
-        self += File(
-            self.expand('{{component.workdir}}/elasticsearch-mappings.json'),
-            source='elasticsearch-mappings.json',
-            template_context=self
-            )
-        self += File(
-            self.expand('{{component.workdir}}/elasticsearch-preprocessings.json'),
-            source='elasticsearch-preprocessings.json',
-            template_context=self
-        )
-        self.cmd('source .env')
+        # self += ConfigureElasticSearch()
+        # TODO start redis
+
+
+class InstallPythonPackages(Component):
+    """ 
+    """
+    
+    def verify(self):
+        raise UpdateNeeded()
+
+    def update(self):
+        self.cmd('bin/pip install celery redis')
+        self.cmd('bin/pip install -e git://github.com/collective/collective.elastic.ingest.git#egg=collective.elastic.ingest')
+
+
+# class ConfigureElasticSearch(Component):
+#     """
+#     """
+
+#     def verify(self):
+#         raise UpdateNeeded()
+
+#     def update(self):
+#         self.cmd('source .env')
 
 # TODO if buildout ran: restart via pm2
 # TODO checkout development packages and restart via pm2
+
 
 class BaseInstance(Component):
     workdir = '{{component.zope.workdir}}'

@@ -1,4 +1,4 @@
-# from batou import UpdateNeeded
+from batou import UpdateNeeded
 from batou.component import Component, Attribute
 # from batou.lib.file import File
 # from batou.lib.python import VirtualEnv
@@ -17,16 +17,25 @@ class ElasticSearch(Component):
 
 
     def configure(self):
-        # self.provide('elasticsearch:http', self)
+        self.provide('elasticsearch', self)
 
         download = Download(self.uri, checksum=self.checksum)
         self += download
-
-        extract = Extract(download.target, strip=1)
-        self += extract
+        self += Extract(download.target, create_target_dir=False, strip=1)
         
-        # TODO Ingest ElasticSearch Plugin
-        # https://www.elastic.co/guide/en/elasticsearch/plugins/7.9/ingest-attachment.html
-        # self.cmd('bin/elasticsearch-plugin install ingest-attachment')
+        # TODO install plugin ingest-attachment
+        # self += AddPlugins()
 
-        # TODO redis, celery 
+
+class AddPlugins(Component):
+    """ Ingest ElasticSearch Plugins
+
+    https://www.elastic.co/guide/en/elasticsearch/plugins/7.9/ingest-attachment.html
+    """
+    
+    def verify(self):
+        raise UpdateNeeded()
+
+    def update(self):
+        self.cmd('bin/elasticsearch-plugin install ingest-attachment',
+            communicate=False)
