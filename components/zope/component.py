@@ -42,8 +42,20 @@ class Zope(Component):
         # some ElasticSearch, Celery configuration
         self += File(
             self.expand('{{component.workdir}}/.env'),
-            source='_env'
+            source='_env',
+            template_context=self
+            )
+        self += File(
+            self.expand('{{component.workdir}}/elasticsearch-mappings.json'),
+            source='elasticsearch-mappings.json',
+            template_context=self
+            )
+        self += File(
+            self.expand('{{component.workdir}}/elasticsearch-preprocessings.json'),
+            source='elasticsearch-preprocessings.json',
+            template_context=self
         )
+        self.cmd('source .env')
 
 # TODO if buildout ran: restart via pm2
 # TODO checkout development packages and restart via pm2

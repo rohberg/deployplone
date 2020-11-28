@@ -5,3 +5,7 @@ export PLONE_SERVICE=http://localhost:8080
 export PLONE_PATH=Plone
 export PLONE_USER=admin
 export PLONE_PASSWORD=admin
+
+
+export MAPPINGS_FILE={{component.workdir}}/elasticsearch-mappings.json
+export PREPROCESSINGS_FILE={{component.workdir}}/elasticsearch-preprocessings.json
