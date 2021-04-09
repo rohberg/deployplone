@@ -111,3 +111,4 @@ dist
 
 environments/dev.cfg
 components/zope/buildout.cfg
+components/zope/buildout.cfg
