@@ -27,7 +27,8 @@ class Voltoapp(Component):
     def configure(self):
         self.provide('voltoapp', self)
         # TODO Try to avoid dependency cycle without setting dirty=True
-        # self.varnish = self.require_one('varnish:http', reverse=True, dirty=True)
+        # self.varnish = self.require_one(
+        #     'varnish:http', reverse=True, dirty=True)
         self += Clone(
             self.apprepository,
             branch='master')
